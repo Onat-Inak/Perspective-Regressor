@@ -19,8 +19,8 @@ Dataloader:
 
 Optimizer:
   optimizer: AdamW
-  backbone_lr: 1E-5
-  other_lr: 3E-3
+  backbone_lr: 1E-3
+  other_lr: 1E-3
   beta1: 0.9
   beta2: 0.999
   eps: 1E-8
@@ -36,7 +36,7 @@ Scheduler:
   scheduler: ReduceLROnPlateau
   mode: min
   factor: 0.2
-  patience: 2
+  patience: 4
   threshold: 0.0001
   threshold_mode: 'rel'
   cooldown: 0

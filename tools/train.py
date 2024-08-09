@@ -47,7 +47,7 @@ def train(model, train_loader, val_loader, criterion, optimizer, scheduler, conf
             if (batch + 1) % config.log_period == 0:
                 average_train_loss = running_train_loss / config.log_period
                 print(
-                    f"Epoch [{epoch+1}/{config.num_epochs}], Step [{batch+1}/{n_total_steps * config.num_epochs}], Current Batch [{current_batch}/{n_total_steps}], Train Loss: {average_train_loss:.4f}"
+                    f"Epoch [{epoch+1}/{config.num_epochs}], Step [{batch+1}/{n_total_steps}], Current Batch [{current_batch}/{n_total_steps * config.num_epochs}], Train Loss: {average_train_loss:.4f}"
                 )
                 # Log training metrics
                 train_log(
