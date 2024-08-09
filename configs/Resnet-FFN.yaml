@@ -1,0 +1,58 @@
+
+
+Project:
+  project_name: Perspective-Regressor-Resnet-FFN
+
+Model:
+  model_name: Resnet-FFN
+  num_outputs: 2
+  batch_first: True
+  conv_channel: 512
+  fc_hidden_dims: [256, 128, 64]
+
+Dataloader:
+  batch_size: 64
+  shuffle: True
+  num_workers: 4
+  pin_memory: True
+  drop_last: True
+
+Optimizer:
+  optimizer: AdamW
+  backbone_lr: 1E-5
+  other_lr: 3E-3
+  beta1: 0.9
+  beta2: 0.999
+  eps: 1E-8
+  weight_decay: 0.01
+  amsgrad: False
+  maximize: False
+  foreach: False
+  capturable: False
+  differentiable: False
+  fused: None
+
+Scheduler:
+  scheduler: ReduceLROnPlateau
+  mode: min
+  factor: 0.2
+  patience: 2
+  threshold: 0.0001
+  threshold_mode: 'rel'
+  cooldown: 0
+  min_lr: 0
+  verbose: True
+
+Loss:
+  loss: MSELoss
+
+Training:
+  num_epochs: 30
+  save_dir: 'saved_models'
+  save_period: 10
+  log_period: 10
+  log_dir: 'logs'
+  log_file: 'train.log'
+  log_level: 'INFO'
+  seed: 42
+
