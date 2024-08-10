@@ -3,6 +3,7 @@ experiments/
 wandb/
 sandbox.py
 pretrained/*
+requested_image/*
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

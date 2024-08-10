@@ -18,7 +18,7 @@ def train(model, train_loader, val_loader, criterion, optimizer, scheduler, conf
     seen_images = 0  # number of examples seen
     current_batch = 0
     for epoch in tqdm(range(config.num_epochs)):
-        
+
         # Set model to training mode
         model.train()
         for batch, (X_, y_) in enumerate(train_loader):
@@ -69,14 +69,14 @@ def train(model, train_loader, val_loader, criterion, optimizer, scheduler, conf
             }
         )
         print(f"Validation Loss: {val_loss:.5f} \n")
-        
+
         # Decrease the learning rate regarding config.gamma
         scheduler.step(val_loss)
 
 
 def train_batch(X_, y_, model, optimizer, criterion, config):
     X_, y_ = X_.to(config.device), y_.to(config.device)
-    
+
     # Forward pass
     outputs = model(X_)
     train_loss = criterion(outputs.to(config.device), y_)
@@ -94,7 +94,13 @@ def train_batch(X_, y_, model, optimizer, criterion, config):
 def train_log(train_loss, current_batch, epoch, backbone_lr, other_lr):
     # Log to W&B
     wandb.log(
-        {"epoch": epoch + 1, "train_loss": train_loss, "backbone_lr": backbone_lr, "other_lr": other_lr, "current_batch": current_batch},
+        {
+            "epoch": epoch + 1,
+            "train_loss": train_loss,
+            "backbone_lr": backbone_lr,
+            "other_lr": other_lr,
+            "current_batch": current_batch,
+        },
         step=current_batch,
     )
     print("backbone_lr: ", backbone_lr, "other_lr: ", other_lr)

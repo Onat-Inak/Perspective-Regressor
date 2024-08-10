@@ -28,7 +28,7 @@ def test(model, test_loader, device, project_name, save_model=False):
         # Print and log the results
         print(f"Mean Absolute Error (MAE): {mae}")
         print(f"Mean Squared Error (MSE): {mse}")
-        
+
         print("total_y_[:20]", total_y_[:20])
         print("total_outputs[:20]", total_outputs[:20])
 

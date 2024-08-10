@@ -76,11 +76,16 @@ COPY requirements.txt .
 RUN pip install -r requirements.txt
 
 
-RUN curl -fsSL https://ollama.com/install.sh | sh
-
-
 # copy inputrc to user for a nicer bash experience
 RUN cp /root/.inputrc /home/${HOST_UNAME}/.inputrc \
     && chown ${HOST_UNAME}:${HOST_GID} /home/${HOST_UNAME}/.inputrc
 
+    
+# Set the working directory in the container
 WORKDIR /workspace
+
+# Make port 5000 available to the world outside this container
+EXPOSE 5000
+
+# Run app.py when the container launches
+CMD ["python", "app.py"]
