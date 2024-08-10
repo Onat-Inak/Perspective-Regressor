@@ -5,7 +5,7 @@ from torchvision.models import resnet50, ResNet50_Weights
 
 
 class ResnetFFN(nn.Module):
-    def __init__(self, device,num_outputs, batch_first, conv_channel, fc_hidden_dims):
+    def __init__(self, device, num_outputs, batch_first, conv_channel, fc_hidden_dims):
         super(ResnetFFN, self).__init__()
         self.device = device
         self.num_outputs = num_outputs
