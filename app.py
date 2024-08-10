@@ -68,15 +68,30 @@ def predict():
     if file_name == "":
         return jsonify({"error": "No selected file_name"}), 400
 
+    output = None  # Initialize output variable
+
     try:
         img_path = os.path.join("data/CodingChallenge_v2/imgs/", file_name + ".jpg")
         img = Image.open(img_path)
+
+        # Delete all files in the saved_images directory
+        requested_image_dir = "requested_image/"
+        for filename in os.listdir(requested_image_dir):
+            file_path = os.path.join(requested_image_dir, filename)
+            if os.path.isfile(file_path):
+                os.unlink(file_path)
+
+        # Save the image to a file
+        requested_image_path = os.path.join(requested_image_dir, file_name + ".jpg")
+        img.save(requested_image_path)
+        print(f"Image saved to {requested_image_path}")
+
         img_tensor = (
             transform(img).unsqueeze(0).to(device)
         )  # Add batch dimension and move to device
 
         with torch.no_grad():
-            print("\nMODEL OUTPUT:")
+            print("\nMODEL OUTPUT:", output, "\n")
             output = model(img_tensor)
             print(output)
 
@@ -84,10 +99,16 @@ def predict():
         csv_file_path = "./data/CodingChallenge_v2/car_imgs_4000.csv"
         img_id = file_name  # Define the img_id variable
         df = pd.read_csv(csv_file_path)
-        print("\nGROUND TRUTH:")
+
         gt_perspective_score_hood, gt_perspective_score_backdoor_left = df[
             df["filename"] == img_id + ".jpg"
         ][["perspective_score_hood", "perspective_score_backdoor_left"]].values[0]
+
+        print(
+            "GROUND TRUTH:",
+            [gt_perspective_score_hood, gt_perspective_score_backdoor_left],
+            "\n",
+        )
 
         return jsonify(
             {
