@@ -5,13 +5,13 @@ from torchvision.models import resnet50, ResNet50_Weights
 
 
 class ResnetFFN(nn.Module):
-    def __init__(self, config: dict):
+    def __init__(self, device,num_outputs, batch_first, conv_channel, fc_hidden_dims):
         super(ResnetFFN, self).__init__()
-        self.device = config.device
-        self.num_outputs = config.num_outputs
-        self.batch_first = config.batch_first
-        self.conv_channel = config.conv_channel
-        self.fc_hidden_dims = config.fc_hidden_dims
+        self.device = device
+        self.num_outputs = num_outputs
+        self.batch_first = batch_first
+        self.conv_channel = conv_channel
+        self.fc_hidden_dims = fc_hidden_dims
 
         # initialize Resnet50 weigths and prepocessing images
         self.weights = ResNet50_Weights.IMAGENET1K_V1
