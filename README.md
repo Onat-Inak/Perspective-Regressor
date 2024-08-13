@@ -95,7 +95,7 @@ You can also train the model from scratch using the provided Jupyter Notebook.
 - **`deploy_model4app.sh`:** Shell script to deploy the model using Docker.
 - **`Dockerfile`:** Dockerfile to build the Docker image.
 - **`main.ipynb`:** Jupyter Notebook for training the model from scratch.
-- **`pretrained/model_state_dict_mse_0_0045.pth`:** Pretrained model weights.
+- **`pretrained/`:** Pretrained model weights.
 - **`data/`:** Directory containing the dataset.
 - **`requirements.txt`:** List of required Python packages.
 
